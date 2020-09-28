@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.xiaolai.mapper.DepartmentMapper">
+
+    <select id="getDepList" resultType="department" parameterType="java.lang.String">
+        SELECT * FROM xl_department
+          <if test="depLike != ''">
+              WHERE  depart_name LIKE '%${depLike}%'
+          </if>
+    </select>
+
+    <insert id="save" parameterType="department">
+      INSERT INTO xl_department(`number`,depart_name,`describe`)
+        VALUES (#{department.number},
+                #{department.departName},
+                #{department.describe})
+    </insert>
+    <select id="getDepartById" resultType="department" parameterType="java.lang.Integer">
+        SELECT * FROM xl_department WHERE id = #{id}
+    </select>
+    
+    <update id="update" parameterType="department">
+        UPDATE xl_department
+          SET
+            depart_name = #{department.departName},
+            `describe` = #{department.describe}
+          WHERE id = #{department.id}
+    </update>
+
+
+
+</mapper>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;" lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Olive Enterprise">
+<link rel="shortcut icon" th:href="@{~/img/favicon.ico}">
+<!-- END SHORTCUT ICON -->
+<title>企业内部通讯系统</title>
+<link href="data/bootstrap.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/bootstrap-reset.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-wysihtml5.css">
+<link rel="stylesheet" type="text/css" href="data/colorpicker.css">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-fileupload.css">
+<!-- FONT AWESOME ICON CSS -->
+<link href="data/style.css" rel="stylesheet">
+<!-- THEME BASIC CSS -->
+<link href="data/style-responsive.css" rel="stylesheet">
+<!-- THEME RESPONSIVE CSS -->
+<link href="data/morris.css" rel="stylesheet">
+<!-- MORRIS CHART CSS -->
+<link href="data/clndr.css" rel="stylesheet">
+<link href="data/custom.css" rel="stylesheet">
+<!-- CALENDER CSS -->
+<link type="text/css" rel="stylesheet" href="data/WdatePicker.css"><style>.cke{visibility:hidden;}</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;display: block;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;padding: 5px 5px 8px 5px;font: 10px arial, san serif;text-align: left;}</style></head>
+<body onpageshow='event.persisted&amp;&amp;(function(){var x=CKEDITOR.instances,d,i;for(i in x){d=x[i].document;if(d){d.$.designMode="off";d.$.designMode="on";}}})();'>
+
+	<HEADER class="header white-bg" th:fragment="header">
+		<DIV class="sidebar-toggle-box">
+			<DIV class="fa fa-bars tooltips" data-placement="right"></DIV>
+		</DIV>
+		<A class="logo" href="javascript:void(0)">企业内部通讯
+			<SPAN>系统
+                <SPAN style="color: white; font-weight: bold;">[ <span th:text="${session.emplyee.role.roleDes}"></span> ]&nbsp;&nbsp;&nbsp;<span th:text="${session.emplyee.department.departName}"></span></SPAN></SPAN>
+		</A>
+		<DIV class="top-nav ">
+			<UL class="nav pull-right top-menu">
+				<LI class="dropdown">
+					<A class="dropdown-toggle" href="http://localhost:8080/EnterpriseInternalCommunication/homePage/index.jsp#" data-toggle="dropdown">
+						<IMG alt="" src="data/avatar1_small.jpg">
+						<SPAN class="username" th:text="${session.emplyee.username}"></SPAN>
+						<B class="caret"></B>
+					</A>
+					<UL class="dropdown-menu extended logout">
+						<LI class="log-arrow-up"></LI>
+						<LI>
+							<A id="configP" th:href="@{/personInfo}">
+								<I class=" fa fa-suitcase"></I>个人信息</A>
+						</LI>
+						<LI>
+							<A id="logout" th:href="@{/logout}">
+								<I class="fa fa-key"></I>注销</A>
+						</LI>
+					</UL>
+				</LI>
+			</UL>
+		</DIV>
+	</HEADER>
+		
+
+</body></html>

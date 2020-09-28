@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Olive Enterprise">
+<link rel="shortcut icon" href="http://localhost:8080/EnterpriseInternalCommunication/homePage/img/favicon.ico">
+<!-- END SHORTCUT ICON -->
+<title>企业内部通讯系统</title>
+<link href="data/bootstrap.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/bootstrap-reset.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-wysihtml5.css">
+<link rel="stylesheet" type="text/css" href="data/colorpicker.css">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-fileupload.css">
+<!-- FONT AWESOME ICON CSS -->
+<link href="data/style.css" rel="stylesheet">
+<!-- THEME BASIC CSS -->
+<link href="data/style-responsive.css" rel="stylesheet">
+<!-- THEME RESPONSIVE CSS -->
+<link href="data/morris.css" rel="stylesheet">
+<!-- MORRIS CHART CSS -->
+<link href="data/clndr.css" rel="stylesheet">
+<link href="data/custom.css" rel="stylesheet">
+<!-- CALENDER CSS -->
+<link type="text/css" rel="stylesheet" href="data/WdatePicker.css"><style>.cke{visibility:hidden;}</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;display: block;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;padding: 5px 5px 8px 5px;font: 10px arial, san serif;text-align: left;}</style></head>
+<body class="wysihtml5-supported" onpageshow='event.persisted&amp;&amp;(function(){var x=CKEDITOR.instances,d,i;for(i in x){d=x[i].document;if(d){d.$.designMode="off";d.$.designMode="on";}}})();'>
+	<input value="http://localhost:8080/EnterpriseInternalCommunication/" id="rootPath" type="hidden">
+	<section id="container">
+		<span th:replace="header::header"></span>
+		<span th:replace="aside::aside"></span>
+	<section id="main-content">
+
+<section class="wrapper">
+	<div style="display: none;" class="row" id="departmentbar">
+		<div class="col-lg-12">
+			<section class="panel">
+				<div class="panel-body">
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<label class="sr-only" for="name">部门名称</label> <input class="form-control" id="name" placeholder="部门名称" type="text">
+						</div>
+						<button type="button" class="btn btn-round btn-info" id="search_but">检索</button>
+						<button type="button" class="btn btn-round btn-default" id="clean_but">清空</button>
+						<button type="button" class="btn  btn-info" id="add_but" style="margin-left:50px;"><i class="fa fa-plus"></i>添加部门</button>
+						<button type="button" class="btn  btn-success" id="edit_but"><i class="fa fa-wrench"></i>编辑部门</button>
+					</form>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12" id="department_main">
+
+<div class="col-md-12">
+	<section class="panel">
+		<header class="panel-heading">
+			<span class="label label-primary">添加部门</span> <span class="tools pull-right"> </span>
+		</header>
+		<div class="panel-body">
+			<form novalidate="novalidate" class="form-horizontal tasi-form" method="post" id="addForm" th:action="@{/addDepart}">
+				<div class="form-group">
+					<label class="control-label col-md-3">部门名称</label>
+					<div class="col-md-3 col-xs-11">
+						<input name="departName" id="name" class="form-control form-control-inline input-medium " style="width:230px;" type="text">
+						<span class="help-block" style="color: red;"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">部门描述</label>
+					<div class="col-md-9">
+						<ul style="" class="wysihtml5-toolbar">
+							<li class="dropdown">
+								<a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="fa fa-font"></i>&nbsp;
+									<span class="current-font">Normal text</span>&nbsp;
+									<i class="fa fa-angle-down"></i>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="div" tabindex="-1">Normal text</a>
+									</li>
+									<li>
+										<a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" tabindex="-1">Heading 1</a>
+									</li>
+									<li>
+										<a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" tabindex="-1">Heading 2</a>
+									</li>
+									<li>
+										<a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" tabindex="-1">Heading 3</a>
+									</li>
+									<li>
+										<a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h4">Heading 4</a></li><li><a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h5">Heading 5</a></li><li><a unselectable="on" href="javascript:;" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h6">Heading 6</a></li></ul></li><li><div class="btn-group"><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="bold" title="CTRL+B" tabindex="-1">Bold</a><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="italic" title="CTRL+I" tabindex="-1">Italic</a><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="underline" title="CTRL+U" tabindex="-1">Underline</a></div></li><li><div class="btn-group"><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="insertUnorderedList" title="Unordered list" tabindex="-1"><i class="fa fa-list-ul"></i></a><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="insertOrderedList" title="Ordered list" tabindex="-1"><i class="fa fa-list-ol"></i></a><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="Outdent" title="Outdent" tabindex="-1"><i class="fa fa-indent"></i></a><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="Indent" title="Indent" tabindex="-1"><i class="fa fa-dedent"></i></a></div></li><li><div class="bootstrap-wysihtml5-insert-link-modal modal fade"> <div class="modal-dialog"> <div class="modal-content"><div class="modal-header"><a class="close" data-dismiss="modal"></a><h4 class="modal-title">Insert link</h4></div><div class="modal-body"><input value="http://" class="bootstrap-wysihtml5-insert-link-url1 form-control large" type="text"><label style="margin-top:5px;"> <input class="bootstrap-wysihtml5-insert-link-target" checked="checked" type="checkbox">Open link in new window</label></div><div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a><a href="#" class="btn btn-primary" data-dismiss="modal">Insert link</a></div></div></div></div><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="createLink" title="Insert link" tabindex="-1"><i class="fa fa-share-square-o"></i></a></li><li><div class="bootstrap-wysihtml5-insert-image-modal modal fade"> <div class="modal-dialog"> <div class="modal-content"><div class="modal-header"><a class="close" data-dismiss="modal"></a><h4 class="modal-title">Insert image</h4></div><div class="modal-body">
+							<input value="http://" class="bootstrap-wysihtml5-insert-image-url form-control large" type="text"></div><div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a><a href="#" class="btn btn-primary" data-dismiss="modal">Insert image</a></div></div></div></div><a unselectable="on" href="javascript:;" class="btn btn-default" data-wysihtml5-command="insertImage" title="Insert image" tabindex="-1"><i class="fa fa-picture-o"></i></a></li></ul>
+						<textarea style="" name="describe" cols="" rows="5" id="department_comment" class="wysihtml5 form-control"></textarea>
+						<input value="1" name="_wysihtml5_mode" type="hidden"><iframe style="display: block; background-color: rgb(255, 255, 255); border-collapse: separate; border-color: rgb(226, 226, 228); border-style: solid; border-width: 0.916667px; clear: none; float: none; margin: 0px; outline: 0px none rgb(120, 117, 117); outline-offset: 0px; padding: 6px 12px; position: static; top: auto; left: auto; right: auto; bottom: auto; z-index: auto; vertical-align: text-bottom; text-align: start; box-sizing: border-box; box-shadow: none; border-radius: 4px; width: 604.867px; height: 113.833px;" marginheight="0" marginwidth="0" allowtransparency="true" security="restricted" class="wysihtml5-sandbox" frameborder="0" height="0" width="0"></iframe>
+						<span class="help-block" style="color: red;"></span>
+					</div>
+				</div>
+				<div class="form-actions">
+					<input value="添加" class="btn btn-success" id="add_b111" type="submit"> &nbsp;&nbsp;&nbsp; <input value="取消" class="btn" id="cancel_b" type="button">
+				</div>
+			</form>
+		</div>
+	</section>
+	
+</div></div>
+	</div>
+</section></section>
+		<!-- END MAIN CONTENT -->
+		<!-- BEGIN FOOTER -->
+		<footer class="site-footer" style="position:fixed;bottom:0px;left:0px;width:100% !important;">
+			<div class="text-center">
+				2017 © 企业内部通讯系统 <a href="#" class="go-top"> <i class="fa fa-angle-up"> </i>
+				</a>
+			</div>
+		</footer>
+	</section>
+	<!-- END SECTION -->
+	<!-- BEGIN JS -->
+	<script src="data/jquery-1.js"></script>
+	<!-- BASIC JQUERY 1.8.3 LIB. JS -->
+	<script src="data/bootstrap.js"></script>
+	<!-- BOOTSTRAP JS -->
+	<script src="data/jquery.js"></script>
+	<!-- ACCORDIN JS -->
+	<script src="data/jquery_002.js"></script>
+	<!-- SCROLLTO JS -->
+	<script src="data/jquery_007.js"></script>
+	<!-- NICESCROLL JS -->
+	<script src="data/respond.js"></script>
+	<!-- RESPOND JS -->
+	<script src="data/jquery_006.js"></script>
+	<!-- SPARKLINE JS -->
+	<script src="data/sparkline-chart.js"></script>
+	<!-- SPARKLINE CHART JS -->
+	<script src="data/common-scripts.js"></script><div style="width: 8px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; cursor: default; position: fixed; top: 0px; left: 202px; height: 623px; display: none; opacity: 0;" class="nicescroll-rails" id="ascrail2000"><div style="position: relative; top: 0px; float: right; width: 8px; height: 0px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px;"></div></div><div style="height: 8px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; top: 615px; left: 0px; position: fixed; cursor: default; display: none; opacity: 0;" class="nicescroll-rails" id="ascrail2000-hr"><div style="position: relative; top: 0px; height: 8px; width: 0px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px; left: 0px;"></div></div><div style="width: 6px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; cursor: default; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 0;" class="nicescroll-rails" id="ascrail2001"><div style="position: relative; top: 0px; float: right; width: 6px; height: 611px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px;"></div></div><div style="height: 6px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0;" class="nicescroll-rails" id="ascrail2001-hr"><div style="position: relative; top: 0px; height: 6px; width: 1117px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px;"></div></div>
+	<!-- BASIC COMMON JS -->
+	<script src="data/count.js"></script>
+	<!-- COUNT JS -->
+	<!--Morris-->
+	<script src="data/morris.js"></script>
+	<!-- MORRIS JS -->
+	<script src="data/raphael-min.js"></script>
+	<!-- MORRIS  JS -->
+	<script src="data/chart.js"></script>
+	<!-- CHART JS -->
+	<!-- CALENDER EVENT JS -->
+	<script src="data/moment-2.js"></script>
+	<!-- CALENDER MOMENT JS -->
+	<!-- UNDERSCORE JS -->
+	<script src="data/jquery_008.js"></script>
+	<script src="data/jquery_005.js"></script>
+	<script src="data/main.js"></script>
+	<script src="data/jquery_004.js"></script>
+	<script src="data/jquery_003.js"></script>
+	<script src="data/SystemUtil.js"></script>
+	<script src="data/divUtils.js"></script>
+	<script src="data/WdatePicker.js"></script>
+	<script src="data/wysihtml5-0.js"></script><!-- BOOTSTRAP wysihtml5 JS  -->
+	<script src="data/bootstrap-wysihtml5.js"></script>
+	<script src="data/bootstrap-fileupload.js"></script>
+	<script src="data/ckeditor.js"></script><!-- CKEDITOR JS  -->
+	<!-- JQUERY KNOB JS -->
+	<script>
+      //knob
+      $(".knob").knob();
+    </script>
+
+
+
+
+<div style="display: none;" id="dialodIndex"><div class="dialog1-mask" style="z-index:1000"></div><div id="loadingDiv0" name="loadingDiv" class="margin padding border" style="position: absolute; padding-top: 15px; width: 150px; height: 47px; background: rgb(249, 249, 249) none repeat scroll 0% 0%; z-index: 10001; padding-left: 20px; left: 496px; top: 191px;"><img src="data/loading.gif" style="width: 20px;height: 20px">加载中...请稍后</div></div></body></html>

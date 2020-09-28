@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;" lang="en"  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Olive Enterprise">
+<link rel="shortcut icon" href="http://localhost:8080/EnterpriseInternalCommunication/homePage/img/favicon.ico">
+<!-- END SHORTCUT ICON -->
+<title>企业内部通讯系统</title>
+<link href="data/bootstrap.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/bootstrap-reset.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-wysihtml5.css">
+<link rel="stylesheet" type="text/css" href="data/colorpicker.css">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-fileupload.css">
+<!-- FONT AWESOME ICON CSS -->
+<link href="data/style.css" rel="stylesheet">
+<!-- THEME BASIC CSS -->
+<link href="data/style-responsive.css" rel="stylesheet">
+<!-- THEME RESPONSIVE CSS -->
+<link href="data/morris.css" rel="stylesheet">
+<!-- MORRIS CHART CSS -->
+<link href="data/clndr.css" rel="stylesheet">
+<link href="data/custom.css" rel="stylesheet">
+<!-- CALENDER CSS -->
+<link type="text/css" rel="stylesheet" href="data/WdatePicker.css"><style>.cke{visibility:hidden;}</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;display: block;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;padding: 5px 5px 8px 5px;font: 10px arial, san serif;text-align: left;}</style></head>
+<body onpageshow='event.persisted&amp;&amp;(function(){var x=CKEDITOR.instances,d,i;for(i in x){d=x[i].document;if(d){d.$.designMode="off";d.$.designMode="on";}}})();'>
+<ASIDE th:fragment="aside">
+	<DIV class="nav-collapse" id="sidebar">
+		<UL class="sidebar-menu" id="nav-accordion">
+			<LI>
+				<A id="main" class="active">
+					<I class="fa fa-dashboard"></I>
+					<SPAN>主页</SPAN>
+				</A>
+			</LI>
+			<LI class="sub-menu" >
+				<A href="javascript:void(0);">
+					<I class="fa fa-th"></I>
+					<SPAN>[系统信息管理]</SPAN></A>
+				<UL class="sub">
+					<LI>
+						<A name="../system/user/toMain.action" title="员工信息管理" th:href="@{/empManager}" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ')">员工信息管理</A></LI>
+					<LI>
+						<A name="../system/department/toMain.action" title="部门管理" th:href="@{/toDepart}" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ')">部门管理</A></LI>
+				</UL>
+			</LI>
+			<LI class="sub-menu">
+				<A href="javascript:void(0);">
+					<I class="fa fa-th"></I>
+					<SPAN>[考勤信息管理]</SPAN></A>
+				<UL class="sub">
+					<LI>
+						<A name="../attendance/askforleave/toMain.action" title="请假管理" th:href="@{/toVacateM}" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ','USER')">请假管理</A></LI>
+				</UL>
+			</LI>
+			<LI class="sub-menu" >
+				<A href="javascript:void(0);">
+					<I class="fa fa-th"></I>
+					<SPAN>[办公信息管理]</SPAN></A>
+				<UL class="sub">
+					<LI>
+						<A name="../office/files/toMain.action" title="文件管理" th:href="@{/toFileM}" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ')">文件管理</A></LI>
+					<LI style="display: none">
+						<A name="../office/apply/toMain.action" title="申请管理" href="javascript:void(0)">申请管理</A></LI>
+				</UL>
+			</LI>
+			<LI style="display: none" class="sub-menu" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ')">
+				<A href="javascript:void(0);">
+					<I class="fa fa-th"></I>
+					<SPAN>[申请审批管理]</SPAN></A>
+				<UL class="sub">
+					<LI>
+						<A name="../approve/record/toMain.action" title="审批记录管理" href="javascript:void(0)">审批记录管理</A></LI>
+					<LI>
+						<A name="../approve/askforleave/toMain.action" title="请假审批管理" href="javascript:void(0)">请假审批管理</A></LI>
+				</UL>
+			</LI>
+			<LI class="sub-menu" >
+				<A href="javascript:void(0);">
+					<I class="fa fa-th"></I>
+					<SPAN>[消息管理]</SPAN></A>
+				<UL class="sub">
+					<LI>
+						<A name="../messageManage/message/toSendMain.action" title="发送的消息" th:href="@{/toMessage}" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ','USER')">发送的消息</A></LI>
+					<LI>
+						 <A name="../messageManage/message/toReceiveMain.action" title="收到的消息" th:href="@{/toReciveMsg}" sec:authorize="hasAnyRole('ADMIN','USERT','USERZ','USER')">收到的消息</A></LI>
+				</UL>
+			</LI>
+		</UL>
+	</DIV>
+	<div th:replace="aside::script"></div>
+</ASIDE>
+</body>
+<div th:fragment="script">
+	<script th:src="@{./data/jquery-1.8.3.min.js}"></script>
+	<script>
+        $("#main").click(function(){
+
+            var un = $("#un").attr("data");
+			//location.href=""
+            // $.ajax({
+			// 	 url: "",
+			// 	 async: false,
+			// 	 data:{
+			// 		emplyee: un
+			// 	 },
+			// 	success:function(){
+			// 	     alert(123)
+			// 	}
+			// })
+		})
+	</script>
+</div>
+
+</html>

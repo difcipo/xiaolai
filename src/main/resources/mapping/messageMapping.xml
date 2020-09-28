@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.xiaolai.mapper.MessageMapper">
+
+    <select id="getMessageList" resultMap="messagelist" parameterType="map">
+        SELECT * FROM xl_message
+        WHERE
+        <if test="sendId!=0">
+             send_name = #{sendId}
+        </if>
+        <if test="reciveId!=0">
+             recive_name = #{reciveId}
+        </if>
+        <if test="recivename!=''">
+            AND  recive_name in (SELECT id FROM xl_emplyee WHERE user_name LIKE '%${recivename}%')
+        </if>
+    </select>
+    <resultMap id="messagelist" type="message">
+        <result property="id" column="id"/>
+        <result property="number" column="number"/>
+        <result property="content" column="content"/>
+        <result property="sendTime" column="send_time"/>
+        <result property="reciveTime" column="recive_time"/>
+        <result property="state" column="state"/>
+        <association property="reciveName" column="recive_name" javaType="emplyee" select="reciveemp"/>
+        <association property="sendName" column="send_name" javaType="emplyee" select="sendemp"/>
+    </resultMap>
+    <select id="reciveemp" resultType="emplyee">
+        SELECT * FROM xl_emplyee WHERE id = #{recive_name}
+    </select>
+    <select id="sendemp" resultType="emplyee">
+        SELECT * FROM xl_emplyee WHERE id = #{send_name}
+    </select>
+
+    <insert id="save" parameterType="message">
+        INSERT INTO xl_message(
+            `number`,
+            content,
+            recive_name,
+            send_name,
+            send_time,
+            state
+        )
+        VALUES (
+            #{message.number},
+            #{message.content},
+            #{message.reciveId},
+            #{message.sendName.id},
+            #{message.sendTime},
+            #{message.state}
+        )
+    </insert>
+
+</mapper>

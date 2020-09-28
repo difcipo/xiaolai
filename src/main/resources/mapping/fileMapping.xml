@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.xiaolai.mapper.FileMapper">
+
+    <select id="getFileList" resultMap="upFile" parameterType="java.lang.String">
+        SELECT * FROM xl_file
+            WHERE
+            <if test="empname!=null || empname!=''">
+                up_emp IN (SELECT id FROM xl_emplyee WHERE user_name LIKE '%${empname}%')
+            </if>
+            <if test="title!=null || title!=''">
+                and file_title LIKE '%${title}%'
+            </if>
+    </select>
+    <resultMap id="upFile" type="upFile">
+        <result property="id" column="id"/>
+        <result property="title" column="file_title"/>
+        <result property="upTime" column="up_time"/>
+        <result property="describe" column="describe"/>
+        <association property="emplyee" column="up_emp" javaType="emplyee" select="getEmplyee"/>
+    </resultMap>
+    <select id="getEmplyee" resultType="emplyee">
+        SELECT * from xl_emplyee where id=#{up_emp}
+    </select>
+
+    <insert id="save" parameterType="upFile">
+        INSERT INTO xl_file(file_title,up_emp,up_time,`describe`)
+            VALUES (
+                #{upFile.title},
+                #{upFile.emplyee.id},
+                #{upFile.upTime},
+                #{upFile.describe}
+            )
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM xl_file WHERE id = #{id}
+    </delete>
+
+</mapper>

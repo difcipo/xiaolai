@@ -1,0 +1,42 @@
+﻿<!DOCTYPE HTML>
+<!-- saved from url=(0054)http://localhost:8080/EnterpriseInternalCommunication/ -->
+<HTML lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<HEAD>
+ <META content="IE=11.0000" http-equiv="X-UA-Compatible">
+ <!-- BEGIN META -->
+<META charset="utf-8">
+<META name="viewport" content="width=device-width, initial-scale=1.0">
+<META name="description" content="">
+<META name="author" content="Custom Theme">
+<!-- BEGIN SHORTCUT ICON -->
+<LINK href="homePage/img/favicon.ico" rel="shortcut icon">
+<!-- END SHORTCUT ICON -->
+<TITLE>OA办公室管理系统登录</TITLE>
+<LINK href="data/bootstrap.min.css" rel="stylesheet">
+<LINK href="data/bootstrap-reset.css" rel="stylesheet">
+<LINK href="data/font-awesome.css" rel="stylesheet">
+<LINK href="data/style.css" rel="stylesheet">
+<LINK href="data/style-responsive.css" rel="stylesheet">
+<META name="GENERATOR" content="MSHTML 11.00.9600.18739"></HEAD>
+
+<BODY class="login-screen">
+<!-- BEGIN SECTION -->
+<DIV class="container">
+ <FORM class="form-signin" th:action="@{/login}" method="post">
+  <H2 class="form-signin-heading">企业内部通讯系统登录</H2>
+  <!-- LOGIN WRAPPER -->
+  <DIV class="login-wrap">
+   <INPUT class="form-control" name="username" id="username" autofocus="" type="text" placeholder="登录用户名" value="">
+   <INPUT class="form-control" name="password" id="password" type="password" placeholder="登录密码" value="">
+
+   <input type="submit" value="登录" class="btn btn-lg btn-login btn-block" id="login_but1"/>
+      <P class="l_message" style="color: red;"></P>
+  </DIV>
+ </FORM>
+</DIV>
+<SCRIPT src="data/jquery.js"></SCRIPT>
+<SCRIPT src="data/login.js"></SCRIPT>
+</BODY>
+
+</HTML>

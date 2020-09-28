@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cai.xiaolai.mapper.VacateMapper">
+
+    <select id="getVacateList" resultType="vacate">
+        SELECT * from xl_vacate
+            WHERE
+            <if test="num!=null || num!=''">
+                `number` LIKE '%${num}%'
+            </if>
+
+    </select>
+
+    <insert id="save" parameterType="vacate">
+        INSERT INTO xl_vacate(`number`,vacate_time,start_time,end_time,state)
+          VALUE (
+                    #{vacate.number},
+                    #{vacate.vacateTime},
+                    #{vacate.startTime},
+                    #{vacate.endTime},
+                    #{vacate.state}
+                )
+    </insert>
+
+</mapper>

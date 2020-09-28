@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;" lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Olive Enterprise">
+<link rel="shortcut icon" href="http://localhost:8080/EnterpriseInternalCommunication/homePage/img/favicon.ico">
+<!-- END SHORTCUT ICON -->
+<title>企业内部通讯系统</title>
+<link href="data/bootstrap.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/bootstrap-reset.css" rel="stylesheet">
+<!-- BOOTSTRAP CSS -->
+<link href="data/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-wysihtml5.css">
+<link rel="stylesheet" type="text/css" href="data/colorpicker.css">
+<link rel="stylesheet" type="text/css" href="data/bootstrap-fileupload.css">
+<!-- FONT AWESOME ICON CSS -->
+<link href="data/style.css" rel="stylesheet">
+<!-- THEME BASIC CSS -->
+<link href="data/style-responsive.css" rel="stylesheet">
+<!-- THEME RESPONSIVE CSS -->
+<link href="data/morris.css" rel="stylesheet">
+<!-- MORRIS CHART CSS -->
+<link href="data/clndr.css" rel="stylesheet">
+<link href="data/custom.css" rel="stylesheet">
+<!-- CALENDER CSS -->
+<link type="text/css" rel="stylesheet" href="data/WdatePicker.css"><style>.cke{visibility:hidden;}</style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;display: block;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;padding: 5px 5px 8px 5px;font: 10px arial, san serif;text-align: left;}</style></head>
+<body class="wysihtml5-supported" onpageshow='event.persisted&amp;&amp;(function(){var x=CKEDITOR.instances,d,i;for(i in x){d=x[i].document;if(d){d.$.designMode="off";d.$.designMode="on";}}})();'>
+	<input value="http://localhost:8080/EnterpriseInternalCommunication/" id="rootPath" type="hidden">
+	<section id="container">
+		<span th:replace="header::header"></span>
+		<span th:replace="aside::aside"></span>
+	<section id="main-content">
+
+<section class="wrapper">
+	<div class="row" id="messagebar">
+		<div class="col-lg-12">
+			<section class="panel">
+				<div class="panel-body">
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<label class="sr-only" for="name">按发消息人查询</label> <input class="form-control" id="name" placeholder="按发消息人查询" type="text">
+						</div>
+						<button type="button" class="btn btn-round btn-info" id="search_but">检索</button>
+						<button type="button" class="btn btn-round btn-default" id="clean_but">清空</button>
+						<button type="button" class="btn  btn-info" id="reply_but" style="margin-left: 50px;">
+							<i class="fa fa-plus"></i>回复
+						</button>
+						<button type="button" class="btn  btn-success" id="look_but">
+							<i class="fa fa-wrench"></i>查看
+						</button>
+					</form>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12" id="message_main">
+
+<section class="panel">
+	<header class="panel-heading">
+		<span class="label label-primary">消息列表 </span>
+	</header>
+	<div class="panel-body">
+		<section id="unseen">
+			<table class="table table-bordered table-striped table-condensed" id="messagelist">
+				<thead>
+					<tr>
+						<th width="2%"><input name="all" value="true" id="selectAll" type="checkbox"><input id="__checkbox_selectAll" name="__checkbox_all" value="true" type="hidden"></th>
+						<th width="4%">序号</th>
+						<th width="10%">消息编号</th>
+						<th width="7%">发消息人</th>
+						<th width="12%">发消息时间</th>
+						<th width="7%">状态</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr th:each="msg : ${pageInfo.list}">
+							<input name="id" th:value="${msg.id}" id="id" type="hidden">
+							<td><input name="sel" value="true" id="sel" type="checkbox"><input id="__checkbox_sel" name="__checkbox_sel" value="true" type="hidden"></td>
+							<td>[[${msg.id}]]</td>
+							<td>[[${msg.number}]]</td>
+							<td>[[${msg.sendName.username}]]</td>
+							<td>[[${msg.sendTime}]]</td>
+							<td>
+								<span th:class="${msg.state==0?'label label-warning':'label label-info'}" th:text="${msg.state==0?'未回复':'已回复'}"></span>
+							</td>
+						
+						</tr>
+					
+				</tbody>
+			</table>
+			
+
+<div class="row-fluid">
+	<div class="span6">
+		<div class="dataTables_info" id="example_info">
+			当前共有<span class="number" style="color: red;" th:text="${pageInfo.total}">1 </span>条记录
+		</div>
+	</div>
+	<div class="span6">
+		<div class="dataTables_paginate paging_bootstrap pagination">
+			<ul>
+				<li class="prev disabled"><a th:href="@{/toReciceMsg}">首页</a></li>
+				<li class="prev disabled"><a th:href="@{/toReciceMsg(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></li>
+				<li class="active" th:each="index : ${#numbers.sequence(1,pageInfo.pages)}">
+					<a th:href="@{/toReciceMsg(pageNum=${index})}">
+						<span class="thispage" id="thisPage" style="height: 18px; padding-top: 2px !important;" th:text="${index}"> 1</span>
+					</a>
+				</li>
+				<li class="next disabled"><a th:href="@{/toReciceMsg(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></li>
+				<li class="next disabled"><a th:href="@{/toReciceMsg(pageNum=${pageInfo.lastPage})}">尾页</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+		</section>
+	</div>
+</section></div>
+	</div>
+</section></section>
+		<!-- END MAIN CONTENT -->
+		<!-- BEGIN FOOTER -->
+		<footer class="site-footer" style="position:fixed;bottom:0px;left:0px;width:100% !important;">
+			<div class="text-center">
+				2017 © 企业内部通讯系统 <a href="#" class="go-top"> <i class="fa fa-angle-up"> </i>
+				</a>
+			</div>
+		</footer>
+	</section>
+	<!-- END SECTION -->
+	<!-- BEGIN JS -->
+	<script src="data/jquery-1.js"></script>
+	<!-- BASIC JQUERY 1.8.3 LIB. JS -->
+	<script src="data/bootstrap.js"></script>
+	<!-- BOOTSTRAP JS -->
+	<script src="data/jquery.js"></script>
+	<!-- ACCORDIN JS -->
+	<script src="data/jquery_002.js"></script>
+	<!-- SCROLLTO JS -->
+	<script src="data/jquery_007.js"></script>
+	<!-- NICESCROLL JS -->
+	<script src="data/respond.js"></script>
+	<!-- RESPOND JS -->
+	<script src="data/jquery_006.js"></script>
+	<!-- SPARKLINE JS -->
+	<script src="data/sparkline-chart.js"></script>
+	<!-- SPARKLINE CHART JS -->
+	<script src="data/common-scripts.js"></script><div style="width: 8px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; cursor: default; position: fixed; top: 0px; left: 202px; height: 623px; display: none; opacity: 0;" class="nicescroll-rails" id="ascrail2000"><div style="position: relative; top: 0px; float: right; width: 8px; height: 0px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px;"></div></div><div style="height: 8px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; top: 615px; left: 0px; position: fixed; cursor: default; display: none; opacity: 0;" class="nicescroll-rails" id="ascrail2000-hr"><div style="position: relative; top: 0px; height: 8px; width: 0px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px; left: 0px;"></div></div><div style="width: 6px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; cursor: default; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 0;" class="nicescroll-rails" id="ascrail2001"><div style="position: relative; top: 0px; float: right; width: 6px; height: 611px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px;"></div></div><div style="height: 6px; z-index: 1000; background: rgb(17, 96, 119) none repeat scroll 0% 0%; position: fixed; left: 0px; width: 100%; bottom: 0px; cursor: default; display: none; opacity: 0;" class="nicescroll-rails" id="ascrail2001-hr"><div style="position: relative; top: 0px; height: 6px; width: 1117px; background-color: rgb(114, 208, 235); background-clip: padding-box; border-radius: 10px;"></div></div>
+	<!-- BASIC COMMON JS -->
+	<script src="data/count.js"></script>
+	<!-- COUNT JS -->
+	<!--Morris-->
+	<script src="data/morris.js"></script>
+	<!-- MORRIS JS -->
+	<script src="data/raphael-min.js"></script>
+	<!-- MORRIS  JS -->
+	<script src="data/chart.js"></script>
+	<!-- CHART JS -->
+	<!-- CALENDER EVENT JS -->
+	<script src="data/moment-2.js"></script>
+	<!-- CALENDER MOMENT JS -->
+	<!-- UNDERSCORE JS -->
+	<script src="data/jquery_008.js"></script>
+	<script src="data/jquery_005.js"></script>
+	<script src="data/main.js"></script>
+	<script src="data/jquery_004.js"></script>
+	<script src="data/jquery_003.js"></script>
+	<script src="data/SystemUtil.js"></script>
+	<script src="data/divUtils.js"></script>
+	<script src="data/WdatePicker.js"></script>
+	<script src="data/wysihtml5-0.js"></script><!-- BOOTSTRAP wysihtml5 JS  -->
+	<script src="data/bootstrap-wysihtml5.js"></script>
+	<script src="data/bootstrap-fileupload.js"></script>
+	<script src="data/ckeditor.js"></script><!-- CKEDITOR JS  -->
+	<!-- JQUERY KNOB JS -->
+	<script>
+      //knob
+      $(".knob").knob();
+    </script>
+
+
+
+
+<div style="display: none;" id="dialodIndex"><div class="dialog1-mask" style="z-index:1000"></div><div id="loadingDiv0" name="loadingDiv" class="margin padding border" style="position: absolute; padding-top: 15px; width: 150px; height: 47px; background: rgb(249, 249, 249) none repeat scroll 0% 0%; z-index: 10001; padding-left: 20px; left: 496px; top: 191px;"><img src="data/loading.gif" style="width: 20px;height: 20px">加载中...请稍后</div></div></body></html>
